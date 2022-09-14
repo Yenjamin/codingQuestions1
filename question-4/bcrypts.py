@@ -15,6 +15,7 @@ def fileRead(path):
         return(lines[0])
     except Exception as e:
         print(e)
+        return(-1)
 
 def stdRead():
     text = input("Please enter the string:\n")
@@ -44,10 +45,11 @@ if __name__ == "__main__":
             c.execute("CREATE TABLE results (string text, rounds integer, hashed text)")
         results = c.execute(f"SELECT * FROM results WHERE string='{string}' AND rounds={args.rounds}").fetchall()
         if results == []:
-            hashed = bcrypter(string, args.rounds)
-            if hashed != -1:
-                c.execute(f"INSERT INTO results VALUES ('{string}', {args.rounds}, '{hashed}')")
-                print(hashed)
+            if string != -1:
+                hashed = bcrypter(string, args.rounds)
+                if hashed != -1:
+                    c.execute(f"INSERT INTO results VALUES ('{string}', {args.rounds}, '{hashed}')")
+                    print(hashed)
         else:
             print(results[0][2])
         conn.commit()
