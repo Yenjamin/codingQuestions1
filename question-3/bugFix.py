@@ -53,20 +53,18 @@ def print_troll_checked(src_fn, directory):
 
     file = open(directory+"/"+src_fn)
     text = file.read()
+    file.close()
 
     try:
         print(troll_check(text))
-        file.close()
         return(0)
 
     except TheyreEatingHer:
         print("We found trolls!")
-        file.close()
         return(1)
 
     except ThenTheyreGoingToEatMe:
         print("Looks like a nice place for a vacaiton!")
-        file.close()
         return(-1)
 
 
