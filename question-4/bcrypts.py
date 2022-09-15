@@ -13,6 +13,9 @@ def fileRead(path):
         with open(path) as f:
             lines = f.readlines()
         return(lines[0])
+    except IndexError :
+        print("empty file")
+        return(-1)
     except Exception as e:
         print(e)
         return(-1)
